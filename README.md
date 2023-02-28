@@ -14,5 +14,5 @@ The following python packages are required to use the code in this repository.
 ```python
 import GEFModel as gef
  
-gef.run_test("./data/Monotone/30_25_101.txt", timelimit=180)
+gef.run_test("./data/Monotone/30_25_101.txt", time_limit=180)
 ```

@@ -153,7 +153,7 @@ class Data:
         if item_card is not None:
             self.item_card = item_card
         else:
-            self.item_card = [n_item] * n_item
+            self.item_card = [n_cust] * n_item
         
         self.budget = budget
 

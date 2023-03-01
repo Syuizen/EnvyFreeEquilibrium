@@ -85,7 +85,11 @@ class Data:
                         read_budget = True
                         budget = [float('inf')] * n_cust
                         continue
-                
+                    
+                    if 'item partition_index cardinality' in line:
+                        read_partition = True
+                        continue
+
                 if read_budget:
                     buyer, _budget = list(map(int, line.split()))
                     budget[buyer] = _budget
@@ -96,22 +100,22 @@ class Data:
                     continue
 
                 if wait_partition_num:
-                    partition_num = int(line)
+                    partition_num = int(line) - 1 
                     item_card = [n_item] * n_item
                     items_partition = {i: [] for i in range(partition_num)}
                     wait_partition_num = False
-                    read_partition=True
                     continue
                 
                 if read_partition:
+                    
                     if ':=' in line:
                         continue
 
-                    item, part_idx, card = list(map(int, line.split()))
-                    items_partition[part_idx].append(item)
-                    item_card[item] = card
+                    _item, part_idx, card = list(map(int, line.split()))
+                    items_partition[part_idx].append(_item)
+                    item_card[_item] = card
 
-                    if item == n_item - 1:
+                    if _item == n_item - 1:
                         read_partition = False
                     continue
 
